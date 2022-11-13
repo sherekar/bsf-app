@@ -11,22 +11,22 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.bsf.app.service.AccountService;
+import com.bsf.app.service.TransactionService;
 
-@WebMvcTest(AccountController.class)
-public class AccountControllerTest {
+@WebMvcTest(TransactionController.class)
+public class TransactionControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private AccountService accountService;
+	private TransactionService transactionService;
 
 	@Test
-	public void createAccountTest() throws Exception {
-		this.mockMvc.perform(put("/api/account/create").contentType(MediaType.APPLICATION_JSON)
-				.content("{\"name\":\"Prasanna\", \"number\":\"202206101986\", \"balance\":\"340.50\"}")
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isCreated());
+	public void transferTest() throws Exception {
+		this.mockMvc.perform(put("/api/transfer").contentType(MediaType.APPLICATION_JSON)
+				.content("{\"fromAccount\":\"202223111987\", \"toAccount\":\"202206101986\", \"amount\":\"49.75\"}")
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isAccepted());
 	}
 
 }
